@@ -1,0 +1,26 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using RentVaultAPI.DTOs.Requests;
+using RentVaultAPI.Services.Interfaces;
+
+namespace RentVaultAPI.Controllers
+{
+    [ApiController]
+    [Route("api/users")]
+    public class UserController : ControllerBase
+    {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser(AddUserRequests request)
+        {
+            await _userService.AddUserAsync(request.Email, request.Password);
+            return Ok();
+        }
+    }
+}

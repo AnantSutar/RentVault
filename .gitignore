@@ -1,0 +1,13 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+# Environment / secrets
+appsettings.Development.json
+.env
+
+# Frontend (future)
+node_modules/
+dist/
