@@ -1,7 +1,12 @@
-﻿namespace RentVaultAPI.Services.Interfaces
+﻿using RentVaultAPI.DTOs.Requests;
+
+namespace RentVaultAPI.Services.Interfaces
 {
     public interface IUserService
     {
-        Task AddUserAsync(string email, string password);
+        Task AddUserAsync(AddUserRequests request);
+
+        Task UpdateUserDetailsAsync(UpdateUserRequest request);
+        
     }
 }

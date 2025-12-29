@@ -14,15 +14,18 @@ namespace RentVaultAPI.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(User user)
+        public  Task AddAsync(User user)
         {
-            await _context.Users.AddAsync(user);
-        }
+             _context.Users.AddAsync(user);
+            return Task.CompletedTask;
+
+            }
 
         public async Task<User?> GetByEmailAsync(string email)
         {
            return await _context.Users.FirstOrDefaultAsync(m => m.Email == email);
 
         }
+
     }
 }
