@@ -19,8 +19,15 @@ namespace RentVaultAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(AddUserRequests request)
         {
-            await _userService.AddUserAsync(request.Email, request.Password);
+            await _userService.AddUserAsync(request);
             return Ok();
+        }
+        // UPDATE (Partial update - MVP)
+        [HttpPatch]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request)
+        {
+            await _userService.UpdateUserDetailsAsync(request);
+            return NoContent();
         }
     }
 }

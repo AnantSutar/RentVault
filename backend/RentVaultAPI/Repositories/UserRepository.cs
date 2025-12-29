@@ -21,9 +21,9 @@ namespace RentVaultAPI.Repositories
 
             }
 
-        public async Task<User?> GetByEmailAsync(string email)
+        public  Task<User?> GetByEmailAsync(string email)
         {
-           return await _context.Users.FirstOrDefaultAsync(m => m.Email == email);
+           return  _context.Users.FirstOrDefaultAsync(m => m.Email == email);
 
         }
 
