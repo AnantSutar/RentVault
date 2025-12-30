@@ -27,5 +27,9 @@ namespace RentVaultAPI.Repositories
 
         }
 
+        public Task<User?> GetByIdAsync(int id)
+        {
+            return _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+        }
     }
 }

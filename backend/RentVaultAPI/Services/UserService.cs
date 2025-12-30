@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RentVault.Api.Data;
 using RentVaultAPI.DTOs.Requests;
+using RentVaultAPI.DTOs.Responses;
 using RentVaultAPI.Models;
 using RentVaultAPI.Repositories.Interfaces;
 using RentVaultAPI.Services.Interfaces;
@@ -11,10 +13,12 @@ namespace RentVaultAPI.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly RentVaultDbContext _context;
-        public UserService(IUserRepository userRepository, RentVaultDbContext context)
+        private readonly IMapper _mapper;
+        public UserService(IUserRepository userRepository, RentVaultDbContext context, IMapper mapper)
         {
             _userRepository = userRepository;
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task AddUserAsync(AddUserRequests request)
@@ -55,6 +59,18 @@ namespace RentVaultAPI.Services
 
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task<UserDTO> GetUserByIdAsync(int userId)
+        {
+            
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return null;
+            }
+            var userdto = _mapper.Map<UserDTO>(user);
+            return userdto;
         }
     }
 

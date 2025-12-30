@@ -1,4 +1,6 @@
 ﻿using RentVaultAPI.DTOs.Requests;
+using RentVaultAPI.DTOs.Responses;
+using RentVaultAPI.Models;
 
 namespace RentVaultAPI.Services.Interfaces
 {
@@ -7,6 +9,7 @@ namespace RentVaultAPI.Services.Interfaces
         Task AddUserAsync(AddUserRequests request);
 
         Task UpdateUserDetailsAsync(UpdateUserRequest request);
+        Task<UserDTO> GetUserByIdAsync(int userId);
         
     }
 }

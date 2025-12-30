@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentVaultAPI.DTOs.Requests;
+using RentVaultAPI.Models;
 using RentVaultAPI.Services.Interfaces;
 
 namespace RentVaultAPI.Controllers
@@ -28,6 +29,17 @@ namespace RentVaultAPI.Controllers
         {
             await _userService.UpdateUserDetailsAsync(request);
             return NoContent();
+        }
+
+        [HttpGet("{userId:int}")]
+        public async Task<IActionResult> GetUserById([FromRoute] int userId)
+        {
+            var user = await _userService.GetUserByIdAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+
         }
     }
 }

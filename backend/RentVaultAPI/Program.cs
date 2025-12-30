@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using RentVault.Api.Data;
+using RentVaultAPI.Helper;
 using RentVaultAPI.Models;
 using RentVaultAPI.Repositories;
 using RentVaultAPI.Repositories.Interfaces;
@@ -18,8 +20,11 @@ builder.Services.AddDbContext<RentVaultDbContext>(options =>
 });
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
